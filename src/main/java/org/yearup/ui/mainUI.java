@@ -13,9 +13,9 @@ public class mainUI {
 
         System.out.println("Welcome");
         System.out.println("What you would you like to do? ");
-        System.out.println("1 - View Dealership Options ");
-        System.out.println("2 - Lease/Buy a vehicle ");
-        System.out.print("Please select a command (1,2): ");
+        System.out.println("1 - Manage Dealership ");
+        System.out.println("2 - Manage Lease/Sale Contracts ");
+        System.out.print("Please select a command (1 or 2): ");
         userInput = scanner.nextLine();
 
         switch (userInput)

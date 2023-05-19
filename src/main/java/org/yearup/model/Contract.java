@@ -5,13 +5,13 @@ public abstract class Contract {
     private String date;
     private String name;
     private String email;
-    private double sold;
+    private int vehicleID;
 
-    public Contract(String date, String name, String email, double sold) {
+    public Contract(String date, String name, String email, int vehicleID) {
         this.date = date;
         this.name = name;
         this.email = email;
-        this.sold = sold;
+        this.vehicleID = vehicleID;
     }
 
     public String getDate() {
@@ -26,8 +26,8 @@ public abstract class Contract {
         return email;
     }
 
-    public double getSold() {
-        return sold;
+    public int getVehicleID() {
+        return vehicleID;
     }
 
     public abstract double getTotalPrice();
