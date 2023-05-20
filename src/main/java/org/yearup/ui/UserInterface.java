@@ -135,7 +135,7 @@ public class UserInterface {
     }
 
     // Method to display all the vehicles in the dealership
-    private void processAllVehiclesRequest() {
+    public void processAllVehiclesRequest() {
 
         // Get all the vehicles from the dealership and store them in an ArrayList
         ArrayList<Vehicle> vehicles = dealership.getAllVehicle();

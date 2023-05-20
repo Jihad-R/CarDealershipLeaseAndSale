@@ -43,7 +43,7 @@ public class DealershipFileManager {
             double price = Double.parseDouble(vehicleData[7]);
 
 
-            dealership.inventory.add(new Vehicle(vin, year, make, model, type, color, odometer, price));
+            dealership.getAllVehicle().add(new Vehicle(vin, year, make, model, type, color, odometer, price));
         }
 
         scanFile.close();
