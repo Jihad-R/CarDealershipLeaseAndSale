@@ -5,14 +5,15 @@ import java.util.ArrayList;
 public class SaleContract extends Contract{
 
     private final double recordingFee = 100;
-    private double processingFee;
-    private boolean isFinance;
+    private String isFinance;
     private final double salesTax = 0.05;
 
+    DealershipFileManager dealershipFileManager = new DealershipFileManager();
+    Dealership dealership = dealershipFileManager.getDealership();
 
-    public SaleContract(String date, String name, String email, int vehicleID, double processingFee, boolean isFinance) {
+    public SaleContract(String date, String name, String email, int vehicleID, String isFinance)
+    {
         super(date, name, email, vehicleID);
-        this.processingFee = processingFee;
         this.isFinance = isFinance;
     }
 
@@ -20,83 +21,78 @@ public class SaleContract extends Contract{
         return recordingFee;
     }
 
-    public double getProcessingFee() {
-        DealershipFileManager dealershipFileManager = new DealershipFileManager();
-        Dealership dealership = dealershipFileManager.getDealership();
-
+    public double getProcessingFee()
+    {
         ArrayList<Vehicle> vehicles = dealership.getAllVehicle();
-        Vehicle vehicle = null;
+        double price = 0;
 
-        for(int i=0;i<dealership.getAllVehicle().size();i++){
+        for(Vehicle vehicle: vehicles){
 
-            if(vehicles.get(i).getVin() == super.getVehicleID())
+            if(vehicle.getVin() == super.getVehicleID())
             {
-                vehicle = vehicles.get(i);
+                price = vehicle.getPrice();
             }
 
         }
 
-        return vehicle.getPrice() < 10000 ? 295 : 495 ;
+        return price < 10000 ? 295 : 495 ;
 
 
     }
 
-    public boolean isFinance() {
+    public String isFinance() {
         return isFinance;
     }
 
-    public double getSalesTax() {
-
-        DealershipFileManager dealershipFileManager = new DealershipFileManager();
-        Dealership dealership = dealershipFileManager.getDealership();
-
+    public double getSalesTax()
+    {
         ArrayList<Vehicle> vehicles = dealership.getAllVehicle();
-        Vehicle vehicle = null;
+        double price = 0;
 
-        for(int i=0;i<dealership.getAllVehicle().size();i++){
+        for(Vehicle vehicle: vehicles){
 
-            if(vehicles.get(i).getVin() == super.getVehicleID())
+            if(vehicle.getVin() == super.getVehicleID())
             {
-                vehicle = vehicles.get(i);
+                price = vehicle.getPrice();
             }
 
         }
 
 
-        return salesTax*vehicle.getPrice();
+        return salesTax*price;
     }
 
     @Override
-    public double getTotalPrice() {
-
-        DealershipFileManager dealershipFileManager = new DealershipFileManager();
-        Dealership dealership = dealershipFileManager.getDealership();
+    public double getTotalPrice()
+    {
 
         ArrayList<Vehicle> vehicles = dealership.getAllVehicle();
-        Vehicle vehicle = null;
 
-        for(int i=0;i<dealership.getAllVehicle().size();i++){
+        double price = 0;
 
-            if(vehicles.get(i).getVin() == super.getVehicleID())
+        for(Vehicle vehicle: vehicles){
+
+            if(vehicle.getVin() == super.getVehicleID())
             {
-                vehicle = vehicles.get(i);
+                price = vehicle.getPrice();
             }
 
         }
 
-        return vehicle.getPrice() + (getSalesTax()*vehicle.getPrice()) + getRecordingFee() + getProcessingFee();
+        return price + getSalesTax() + getRecordingFee() + getProcessingFee();
     }
 
     @Override
-    public double getMonthlyPayment() {
+    public double getMonthlyPayment()
+    {
         double monthlyPercentageDepreciation;
 
-        if (getProcessingFee() == 295 && isFinance() == true) {
+        if (getProcessingFee() == 295 && isFinance().equalsIgnoreCase("Yes")) {
             monthlyPercentageDepreciation = (4.25/12)/100;
             return getTotalPrice()*monthlyPercentageDepreciation / (1 - Math.pow(1+monthlyPercentageDepreciation,-48));
         }
 
-        if (getProcessingFee() == 495 && isFinance() == true) {
+        if (getProcessingFee() == 495 && isFinance().equalsIgnoreCase("Yes")) {
             monthlyPercentageDepreciation = (5.25/12)/100;
             return getTotalPrice()*monthlyPercentageDepreciation / (1 - Math.pow(1+monthlyPercentageDepreciation,-24));
         }

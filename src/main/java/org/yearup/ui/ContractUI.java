@@ -36,7 +36,7 @@ public class ContractUI {
             {
                 processVehicleLease();break;
             }
-            case "3":
+            case "3":{processVehicleSale();break;}
             default:
         }
 
@@ -68,6 +68,37 @@ public class ContractUI {
 
 
         contractFileManager.saveContract(leaseContract);
+
+    }
+
+    private void processVehicleSale() {
+
+        System.out.println("~~~Sale Vehicle~~~");
+        System.out.print("Enter the ID of the vehicle to lease: ");
+        int vehicleID = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Enter the name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter the email: ");
+        String email = scanner.nextLine();
+
+        System.out.print("Is the Vehicle financed: ");
+        String isFinanced = scanner.nextLine();
+
+        String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+
+        SaleContract saleContract = new SaleContract(date,name,email,vehicleID,isFinanced);
+
+        String info = String.format("\nLease Contract\n"+"-".repeat(15)+
+                        "\nDate: %s\nName: %s" +
+                        "\nEmail: %s\nVehicle ID: %s\nExpected expected value: %s\nLeasing Fee: %s\nTotal Cost: %s",saleContract.getDate(),
+                saleContract.getName(), saleContract.getEmail(),saleContract.getVehicleID(),
+                saleContract.getSalesTax(),saleContract.getProcessingFee(),saleContract.getTotalPrice());
+
+
+        contractFileManager.saveContract(saleContract);
 
     }
 

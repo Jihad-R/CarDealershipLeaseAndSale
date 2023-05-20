@@ -33,7 +33,7 @@ public class ContractFileManager {
                 LeaseContract leaseContract = (LeaseContract) contract;
 
                 info = String.format("%s|%s|%s|%s|%s|%s|%s|%s" +
-                        "|%s|%s|%s|%s|%s|%s|%s","LEASE",
+                        "|%s|%s|%s|%.2f|%.2f|%.2f|%.2f\n","LEASE",
                         leaseContract.getDate(),leaseContract.getName(),
                         leaseContract.getEmail(),leaseContract.getVehicleID(),vehicle.getYear(),
                         vehicle.getMake(),vehicle.getModel(),vehicle.getVehicleType(),vehicle.getColor(),
@@ -45,12 +45,13 @@ public class ContractFileManager {
                 SaleContract saleContract = (SaleContract) contract;
 
                 info = String.format("%s|%s|%s|%s|%s|%s|%s|%s" +
-                                "|%s|%s|%s|%s|%s|%s|%s","SALE",
+                                "|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s\n","SALE",
                         saleContract.getDate(),saleContract.getName(),
                         saleContract.getEmail(),saleContract.getVehicleID(),vehicle.getYear(),
                         vehicle.getMake(),vehicle.getModel(),vehicle.getVehicleType(),vehicle.getColor(),
                         vehicle.getOdometer(),vehicle.getPrice(),saleContract.getSalesTax(),
-                        saleContract.getRecordingFee(),saleContract.getTotalPrice(),saleContract.getMonthlyPayment());
+                        saleContract.getRecordingFee(),saleContract.getProcessingFee(),
+                        saleContract.getTotalPrice(),saleContract.isFinance().toUpperCase(),saleContract.getMonthlyPayment());
             }
 
             fileWriter.write(info);
