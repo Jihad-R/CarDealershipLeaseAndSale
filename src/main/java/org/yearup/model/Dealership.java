@@ -1,7 +1,5 @@
 package org.yearup.model;
 
-import org.yearup.JavaHelpers.ColorCodes;
-
 import java.util.ArrayList;
 
 public class Dealership {
@@ -118,29 +116,17 @@ public class Dealership {
             inventory.add(vehicle);
 
             System.out.println();
-            //Success message
-            System.out.println(ColorCodes.GREEN+"Vehicle ADDED, VIN: "+vehicle.getVin()+ColorCodes.RESET);
-            System.out.println();
         }
 
     // Remove a vehicle from the inventory based on VIN
     public void removeVehicle (int vin)
         {
-            boolean found = false;
 
             for (int i=0; i< inventory.size();i++){
                 if(inventory.get(i).getVin() == vin){
                     inventory.remove(i);
-                    found = true;
                 }
             }
-
-            System.out.println();
-            if(found)
-                System.out.println(ColorCodes.GREEN+"Vehicle REMOVED, VIN: "+vin+ColorCodes.RESET);
-            else
-                System.out.println(ColorCodes.YELLOW+"Vehicle not found!".toUpperCase()+ColorCodes.RESET);
-            System.out.println();
         }
 
     // Getter method for dealership name

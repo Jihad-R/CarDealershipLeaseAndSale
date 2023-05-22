@@ -2,7 +2,6 @@ package org.yearup.model;
 
 import org.yearup.JavaHelpers.ColorCodes;
 
-import java.awt.*;
 import java.io.*;
 import java.util.Scanner;
 

@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class UserInterface {
     private Dealership dealership;
     private DealershipFileManager dealershipFileManager = new DealershipFileManager();
+    private MainMenuUI mainMenu = new MainMenuUI();
 
 
     public UserInterface() {
@@ -56,7 +57,7 @@ public class UserInterface {
         System.out.println("7 - List All vehicle");
         System.out.println("8 - Add a vehicle");
         System.out.println("9 - Remove a vehicle");
-        System.out.println("99 - Quit");
+        System.out.println("99 - Back to main menu");
         System.out.print("Select a Command: ");
     }
 
@@ -101,8 +102,7 @@ public class UserInterface {
                 return;
             }
             case "99": {
-                System.out.println("Thanking you for using our service");
-                return;
+                mainMenu.run();
             }
             default:{
                 System.out.println(ColorCodes.YELLOW +"Unrecognized Input!"+ColorCodes.RESET);
@@ -331,6 +331,9 @@ public class UserInterface {
         // Save the updated dealership inventory to file
         dealershipFileManager.saveDealership(dealership);
 
+        //Success message
+        System.out.println(ColorCodes.GREEN+"Vehicle ADDED, VIN: "+vin+ColorCodes.RESET);
+
     }
 
     public void processRemoveVehicleRequest() {
@@ -349,7 +352,6 @@ public class UserInterface {
 
         // Save the updated dealership inventory to file
         dealershipFileManager.saveDealership(dealership);
-
 
     }
 

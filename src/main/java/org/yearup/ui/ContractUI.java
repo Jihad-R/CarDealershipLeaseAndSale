@@ -2,49 +2,59 @@ package org.yearup.ui;
 
 import org.yearup.model.*;
 
-import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class ContractUI {
+    private DealershipFileManager dealershipFileManager;
+    private ContractFileManager contractFileManager;
+    private UserInterface userInterface;
+    private MainMenuUI mainMenu;
+    private Scanner scanner;
 
-    private DealershipFileManager dealershipFileManager = new DealershipFileManager();
-    private ContractFileManager contractFileManager = new ContractFileManager();
-    private UserInterface userInterface = new UserInterface();
-    private Scanner scanner = new Scanner(System.in);
-
-    public void run (){
-
-        String userInput;
-
-        System.out.println("Hi Welcome to "+dealershipFileManager.getDealership());
-        System.out.println("What would you like to do?");
-        System.out.println("1 - List Available Vehicle? ");
-        System.out.println("2 - Lease a Vehicle");
-        System.out.println("3 - Purchase a Vehicle");
-        System.out.print("Please select a command: ");
-        userInput = scanner.nextLine();
-
-        switch (userInput)
-        {
-            case "1":
-            {
-                userInterface.processAllVehiclesRequest();break;
-            }
-            case "2":
-            {
-                processVehicleLease();break;
-            }
-            case "3":{processVehicleSale();break;}
-            default:
-        }
-
-
+    public ContractUI() {
+        dealershipFileManager = new DealershipFileManager();
+        contractFileManager = new ContractFileManager();
+        userInterface = new UserInterface();
+        mainMenu = new MainMenuUI();
+        scanner = new Scanner(System.in);
     }
 
-    private void processVehicleLease() {
+    public void run() {
+        String userInput = "";
+        while (!userInput.equalsIgnoreCase("X")) {
+            System.out.println("Hi Welcome to " + dealershipFileManager.getDealership().getName());
+            System.out.println("What would you like to do?");
+            System.out.println("1 - List Available Vehicles");
+            System.out.println("2 - Lease a Vehicle");
+            System.out.println("3 - Purchase a Vehicle");
+            System.out.println("99 - Go back to the main menu");
+            System.out.print("Please select a command: ");
+            userInput = scanner.nextLine();
 
+            switch (userInput.toUpperCase()) {
+                case "1":
+                    userInterface.processAllVehiclesRequest();
+                    break;
+                case "2":
+                    processVehicleLease();
+                    break;
+                case "3":
+                    processVehicleSale();
+                    break;
+                case "99":
+                    mainMenu.run();
+                    break;
+                default:
+                    System.out.println("Invalid Input! Try again.");
+                    break;
+            }
+        }
+    }
+
+    // Process vehicle lease
+    private void processVehicleLease() {
         System.out.println("~~~Lease Vehicle~~~");
         System.out.print("Enter the ID of the vehicle to lease: ");
         int vehicleID = scanner.nextInt();
@@ -58,23 +68,15 @@ public class ContractUI {
 
         String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 
-        LeaseContract leaseContract = new LeaseContract(date,name,email,vehicleID);
-
-        String info = String.format("\nLease Contract\n"+"-".repeat(15)+
-                "\nDate: %s\nName: %s" +
-                "\nEmail: %s\nVehicle ID: %s\nExpected expected value: %s\nLeasing Fee: %s\nTotal Cost: %s",leaseContract.getDate(),
-                leaseContract.getName(), leaseContract.getEmail(),leaseContract.getVehicleID(),
-                leaseContract.getExpectedEnding(),leaseContract.getLeaseFee(),leaseContract.getTotalPrice());
-
+        LeaseContract leaseContract = new LeaseContract(date, name, email, vehicleID);
 
         contractFileManager.saveContract(leaseContract);
-
     }
 
+    // Process vehicle sale
     private void processVehicleSale() {
-
         System.out.println("~~~Sale Vehicle~~~");
-        System.out.print("Enter the ID of the vehicle to lease: ");
+        System.out.print("Enter the ID of the vehicle to purchase: ");
         int vehicleID = scanner.nextInt();
         scanner.nextLine();
 
@@ -84,22 +86,13 @@ public class ContractUI {
         System.out.print("Enter the email: ");
         String email = scanner.nextLine();
 
-        System.out.print("Is the Vehicle financed: ");
+        System.out.print("Is the vehicle financed? ");
         String isFinanced = scanner.nextLine();
 
         String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 
-        SaleContract saleContract = new SaleContract(date,name,email,vehicleID,isFinanced);
-
-        String info = String.format("\nLease Contract\n"+"-".repeat(15)+
-                        "\nDate: %s\nName: %s" +
-                        "\nEmail: %s\nVehicle ID: %s\nExpected expected value: %s\nLeasing Fee: %s\nTotal Cost: %s",saleContract.getDate(),
-                saleContract.getName(), saleContract.getEmail(),saleContract.getVehicleID(),
-                saleContract.getSalesTax(),saleContract.getProcessingFee(),saleContract.getTotalPrice());
-
+        SaleContract saleContract = new SaleContract(date, name, email, vehicleID, isFinanced);
 
         contractFileManager.saveContract(saleContract);
-
     }
-
 }
