@@ -70,7 +70,7 @@ This code snippet is interesting because it calculates the monthly payment for a
 ![SaleVehicle](screenshots/SaleVehicle.png)
 
 ### Exit the application
-![exitApplication](screenshots/exitApp.png)
+![exitApplication](screenshots/ExitApp.png)
 
 ## How to use📋
 
