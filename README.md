@@ -8,7 +8,6 @@ To run this application, you'll need to have Java installed on your computer. Yo
 Once you have Java installed, open the IntellJ IDE. Then navigate to the main.java file and press run.
 
 ## Interesting Code <img src="https://github.com/devicons/devicon/blob/master/icons/java/java-original-wordmark.svg" title="Java" alt="Java" width="40" height="40"/>&nbsp;
-`
       @Override
     public double getMonthlyPayment() {
         double monthlyPercentageDepreciation = (4.0 / 12) / 100;
@@ -17,7 +16,7 @@ Once you have Java installed, open the IntellJ IDE. Then navigate to the main.ja
         double principle = getTotalPrice();
         return principle * monthlyPercentageDepreciation / (1 - Math.pow(1 + monthlyPercentageDepreciation, -36));
     }
-`
+    
 This code snippet is interesting because it calculates the monthly payment for a financial transaction based on a total price and a fixed monthly percentage depreciation rate. It demonstrates the application of financial calculations in programming, utilizes mathematical functions, and promotes modular code design.
 
 ## CLI Screenshots 📷
