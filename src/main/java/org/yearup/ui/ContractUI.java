@@ -1,7 +1,9 @@
 package org.yearup.ui;
 
+import org.yearup.JavaHelpers.ColorCodes;
 import org.yearup.model.*;
 
+import java.awt.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -55,7 +57,8 @@ public class ContractUI {
 
     // Process vehicle lease
     private void processVehicleLease() {
-        System.out.println("~~~Lease Vehicle~~~");
+        System.out.println(ColorCodes.WHITE_BACKGROUND+ColorCodes.BLACK+"~ Lease Vehicle ~"+
+                ColorCodes.RESET);
         System.out.print("Enter the ID of the vehicle to lease: ");
         int vehicleID = scanner.nextInt();
         scanner.nextLine();
@@ -75,7 +78,8 @@ public class ContractUI {
 
     // Process vehicle sale
     private void processVehicleSale() {
-        System.out.println("~~~Sale Vehicle~~~");
+        System.out.println(ColorCodes.WHITE_BACKGROUND+ColorCodes.BLACK+"~ Sale Vehicle ~"
+                +ColorCodes.RESET);
         System.out.print("Enter the ID of the vehicle to purchase: ");
         int vehicleID = scanner.nextInt();
         scanner.nextLine();
