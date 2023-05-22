@@ -8,13 +8,13 @@ import org.yearup.model.Vehicle;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class UserInterface {
+public class DealershipUI {
     private Dealership dealership;
     private DealershipFileManager dealershipFileManager = new DealershipFileManager();
     private MainMenuUI mainMenu = new MainMenuUI();
 
 
-    public UserInterface() {
+    public DealershipUI() {
     }
 
     private void init() {

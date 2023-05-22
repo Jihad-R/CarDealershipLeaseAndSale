@@ -8,12 +8,11 @@ public class MainMenuUI {
 
     public void run()
     {
-        UserInterface dealershipUI = new UserInterface();
+        DealershipUI dealershipUI = new DealershipUI();
         ContractUI contractUI = new ContractUI();
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);   
         String userInput;
 
-        System.out.println("Welcome");
         System.out.println("What you would you like to do? ");
         System.out.println("1 - Manage Dealership ");
         System.out.println("2 - Manage Lease/Sale Contracts ");

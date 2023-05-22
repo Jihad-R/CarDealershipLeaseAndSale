@@ -3,7 +3,6 @@ package org.yearup.ui;
 import org.yearup.JavaHelpers.ColorCodes;
 import org.yearup.model.*;
 
-import java.awt.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -11,14 +10,14 @@ import java.util.Scanner;
 public class ContractUI {
     private DealershipFileManager dealershipFileManager;
     private ContractFileManager contractFileManager;
-    private UserInterface userInterface;
+    private DealershipUI dealershipUI;
     private MainMenuUI mainMenu;
     private Scanner scanner;
 
     public ContractUI() {
         dealershipFileManager = new DealershipFileManager();
         contractFileManager = new ContractFileManager();
-        userInterface = new UserInterface();
+        dealershipUI = new DealershipUI();
         mainMenu = new MainMenuUI();
         scanner = new Scanner(System.in);
     }
@@ -26,23 +25,20 @@ public class ContractUI {
     public void run() {
         String userInput = "";
         while (!userInput.equalsIgnoreCase("X")) {
-            System.out.println("Hi Welcome to " + dealershipFileManager.getDealership().getName());
+            System.out.println(ColorCodes.WHITE_BACKGROUND+ColorCodes.BLACK+
+                    "Hi Welcome to " + dealershipFileManager.getDealership().getName()+ColorCodes.RESET);
             System.out.println("What would you like to do?");
-            System.out.println("1 - List Available Vehicles");
-            System.out.println("2 - Lease a Vehicle");
-            System.out.println("3 - Purchase a Vehicle");
+            System.out.println("1 - Lease a Vehicle");
+            System.out.println("2 - Purchase a Vehicle");
             System.out.println("99 - Go back to the main menu");
             System.out.print("Please select a command: ");
             userInput = scanner.nextLine();
 
             switch (userInput.toUpperCase()) {
                 case "1":
-                    userInterface.processAllVehiclesRequest();
-                    break;
-                case "2":
                     processVehicleLease();
                     break;
-                case "3":
+                case "2":
                     processVehicleSale();
                     break;
                 case "99":
