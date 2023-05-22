@@ -8,35 +8,17 @@ To run this application, you'll need to have Java installed on your computer. Yo
 Once you have Java installed, open the IntellJ IDE. Then navigate to the main.java file and press run.
 
 ## Interesting Code <img src="https://github.com/devicons/devicon/blob/master/icons/java/java-original-wordmark.svg" title="Java" alt="Java" width="40" height="40"/>&nbsp;
+`
+      @Override
+    public double getMonthlyPayment() {
+        double monthlyPercentageDepreciation = (4.0 / 12) / 100;
 
-    public void saveDealership(Dealership dealership) {
-        FileWriter fileWriter = null;
-
-        try {
-            fileWriter = new FileWriter("inventory.csv", false); // Overwrite the existing file
-            fileWriter.write(String.format("%s|%s|%s\n",dealershipDetails[0],dealershipDetails[1],dealershipDetails[2]));
-            for (Vehicle vehicle : dealership.getAllVehicle()) {
-                String s = String.format("%d|%d|%s|%s|%s|%s|%d|%.2f\n", vehicle.getVin(), vehicle.getYear(),
-                        vehicle.getMake(), vehicle.getModel() ,vehicle.getVehicleType(), vehicle.getColor(),
-                        vehicle.getOdometer(), vehicle.getPrice());
-                fileWriter.write(s);
-            }
-        } catch (IOException e) {
-            System.out.println(ColorCodes.RED+"Error occurred while writing to the file!"+ColorCodes.RESET);
-        } finally {
-            if (fileWriter != null) {
-                try {
-                    fileWriter.flush();
-                    fileWriter.close();
-                } catch (IOException e) {
-                    System.out.println(ColorCodes.RED+"Error occurred while closing the file!"+ColorCodes.RESET);
-                }
-            }
-        }
-
+        // Calculate the monthly payment using the total price
+        double principle = getTotalPrice();
+        return principle * monthlyPercentageDepreciation / (1 - Math.pow(1 + monthlyPercentageDepreciation, -36));
     }
-
-This code snippet is interesting because it demonstrates file handling operations in Java. It uses a `FileWriter` to write dealership data to a file (`inventory.csv`). The code ensures that the existing file is overwritten to update the data accurately. It also utilizes string formatting to construct the data that is written to the file in a readable and consistent format. Exception handling is implemented to handle any potential errors that may occur during file operations, providing informative error messages. All in all, the code snippet showcases important concepts such as file handling, data persistence, string formatting, and exception handling.
+`
+This code snippet is interesting because it calculates the monthly payment for a financial transaction based on a total price and a fixed monthly percentage depreciation rate. It demonstrates the application of financial calculations in programming, utilizes mathematical functions, and promotes modular code design.
 
 ## CLI Screenshots 📷
 ### Home Screen UI
